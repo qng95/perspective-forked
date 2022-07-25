@@ -41,6 +41,7 @@ const dist_folders = [
     "perspective-python-dist-macos-10.15-3.7",
     "perspective-python-dist-macos-10.15-3.8",
     "perspective-python-dist-macos-10.15-3.9",
+    "perspective-python-dist-macos-10.15-3.10",
 
     // Mac 11
     // NOTE: use 10.15
@@ -52,11 +53,13 @@ const dist_folders = [
     "perspective-python-dist-ubuntu-20.04-3.7",
     "perspective-python-dist-ubuntu-20.04-3.8",
     "perspective-python-dist-ubuntu-20.04-3.9",
+    "perspective-python-dist-ubuntu-20.04-3.10",
 
     // Windows 2019 (No 3.6 on windows)
     "perspective-python-dist-windows-2019-3.7",
     "perspective-python-dist-windows-2019-3.8",
     "perspective-python-dist-windows-2019-3.9",
+    "perspective-python-dist-windows-2019-3.10",
 
     // Windows 2022
     // NOTE: omit these for now, rely on 2019 wheels
@@ -74,6 +77,7 @@ const wheels = [
     "cp37-cp37m-macosx_10_15_x86_64",
     "cp38-cp38-macosx_10_15_x86_64",
     "cp39-cp39-macosx_10_15_x86_64",
+    "cp310-cp310-macosx_10_15_x86_64",
 
     // // Mac 11
     // // NOTE: not yet
@@ -87,17 +91,20 @@ const wheels = [
     "cp37-cp37m-manylinux2010_x86_64",
     "cp38-cp38-manylinux2010_x86_64",
     "cp39-cp39-manylinux2010_x86_64",
+    "cp310-cp310-manylinux2010_x86_64",
 
     // Manylinux 2014
     // "cp36-cp36m-manylinux2014_x86_64",
     "cp37-cp37m-manylinux2014_x86_64",
     "cp38-cp38-manylinux2014_x86_64",
     "cp39-cp39-manylinux2014_x86_64",
+    "cp310-cp310-manylinux2014_x86_64",
 
     // Windows (use 2019)
     "cp37-cp37m-win_amd64",
     "cp38-cp38-win_amd64",
     "cp39-cp39-win_amd64",
+    "cp310-cp310-win_amd64",
 ];
 
 // GitHub API Wrapper

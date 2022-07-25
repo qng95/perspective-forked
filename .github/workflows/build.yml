@@ -191,7 +191,7 @@ jobs:
         os:
           - ubuntu-20.04 # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
         python-version:
-          - 3.9
+          - 3.10
         node-version: [16.x]
 
     ##################################
@@ -415,7 +415,7 @@ jobs:
         os:
           - ubuntu-20.04 # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
         python-version:
-          - 3.9
+          - 3.10
 
     ##################################
     # Setup matrix job configuration #
@@ -528,7 +528,7 @@ jobs:
         os:
           - ubuntu-20.04 # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
         python-version:
-          - 3.9
+          - 3.10
         node-version: [16.x]
 
     ##################################
@@ -709,6 +709,7 @@ jobs:
           - 3.7
           - 3.8
           - 3.9
+          - 3.10
         container:
           - none  # Not manylinux, we will use this space to build the WASM assets
           - 2010
@@ -778,6 +779,9 @@ jobs:
 
           - is-full-run: false
             python-version: 3.8
+
+          - is-full-run: false
+            python-version: 3.9
 
 
     ##################################
@@ -1043,7 +1047,7 @@ jobs:
         os:
           - ubuntu-20.04 # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
         python-version:
-          - 3.9
+          - 3.10
         node-version: [16.x]
 
     ##################################
@@ -1222,6 +1226,7 @@ jobs:
           - 3.7
           - 3.8
           - 3.9
+          - 3.10
         node-version: [16.x]
         is-full-run:
           - ${{ needs.initialize.outputs.FULL_RUN == 'true' }}
@@ -1386,7 +1391,7 @@ jobs:
         os:
           - ubuntu-20.04 # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
         python-version:
-          - 3.9
+          - 3.10
 
     ##################################
     # Setup matrix job configuration #
