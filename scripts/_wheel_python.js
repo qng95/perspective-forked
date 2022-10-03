@@ -65,7 +65,7 @@ try {
 
         // These are system deps that may only be in place from pep-517/518 so
         // lets reinstall them to be sure
-        cmd += `${PYTHON} -m pip install -U 'numpy>=1.13.1' wheel twine auditwheel && `;
+        cmd += `${PYTHON} -m pip install -U pip 'numpy>=1.13.1' wheel twine auditwheel && `;
 
         // remove the build folder so we completely rebuild (and pick up the
         // libs we just installed above, since this build method won't use
