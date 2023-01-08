@@ -43,18 +43,6 @@
         "test": "npm-run-all test:run",
         "clean": "rimraf dist"
     },
-    "jest": {
-        "roots": [
-            "test/js"
-        ],
-        "transform": {},
-        "transformIgnorePatterns": [
-            "/build/"
-        ],
-        "verbose": true,
-        "testURL": "http://localhost/",
-        "automock": false
-    },
     "dependencies": {
         "fflate": "^0.7.2",
         "ws": "^6.1.2"
