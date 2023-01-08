@@ -81,6 +81,63 @@ const execute_return = async (cmd) => {
  * Public
  */
 
+exports.get_scope = function get_scope() {
+    if (PACKAGE_MANAGER === "npm") {
+        if (process.env.PACKAGE !== undefined && process.env.PACKAGE !== "") {
+            return (
+                process.env.PACKAGE.split(",")
+                    .map((x) => `--workspace=\"@finos/${x}\"`)
+                    .join(" ") + " --if-present"
+            );
+        } else {
+            return "--workspaces --if-present";
+        }
+    } else if (PACKAGE_MANAGER === "lerna") {
+        const scope = process.env.PACKAGE
+            ? process.env.PACKAGE.startsWith("@")
+                ? process.env.PACKAGE.slice(2, process.env.PACKAGE.length - 1)
+                      .split("|")
+                      .map((x) => `--filter @finos/${x}`)
+                      .join(" ")
+                : `--filter @finos/${process.env.PACKAGE}`
+            : "--filter '*'";
+        return scope;
+    } else if (PACKAGE_MANAGER === "pnpm") {
+        if (process.env.PACKAGE !== undefined && process.env.PACKAGE !== "") {
+            return (
+                process.env.PACKAGE.split(",")
+                    .map((x) => `--filter=\"@finos/${x}\"`)
+                    .join(" ") + " --if-present"
+            );
+        } else {
+            return "--filter=* --if-present";
+        }
+    }
+};
+
+const PACKAGE_MANAGER = "npm";
+exports.PACKAGE_MANAGER = PACKAGE_MANAGER;
+
+exports.run_with_scope = function run_with_scope(strings, ...args) {
+    execute(
+        `${PACKAGE_MANAGER} ${exports.get_scope()} run ${
+            Array.isArray(strings) ? bash(strings, ...args) : strings
+        }`
+    );
+};
+
+exports.bash_with_scope = function bash_with_scope(strings, ...args) {
+    return `${PACKAGE_MANAGER} ${exports.get_scope()} run ${
+        Array.isArray(strings) ? bash(strings, ...args) : strings
+    }`;
+};
+
+exports.exec_with_scope = function exec_with_scope(strings, ...args) {
+    return `${PACKAGE_MANAGER} ${exports.get_scope()} exec -- ${
+        Array.isArray(strings) ? bash(strings, ...args) : strings
+    }`;
+};
+
 /**
  * Calls `path.join` on the result of splitting the input string by the default
  * path delimiter `/`, which allows writing simpler path statements that will

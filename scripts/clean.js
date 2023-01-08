@@ -7,7 +7,7 @@
  *
  */
 
-const { execute, clean } = require("./script_utils.js");
+const { clean, exec_with_scope, run_with_scope } = require("./script_utils.js");
 
 const glob = require("glob");
 const minimatch = require("minimatch");
@@ -18,10 +18,10 @@ const IS_SCREENSHOTS = args.indexOf("--screenshots") !== -1;
 function clean_screenshots(scope) {
     if (args.indexOf("--all") !== -1) {
         try {
-            execute`lerna exec --scope="@finos/${scope}" -- yarn rimraf test/screenshots`;
+            exec_with_scope`npx rimraf test/screenshots`;
         } catch (e) {}
     } else {
-        execute`lerna run clean:screenshots --scope="@finos/${scope}"`;
+        run_with_scope`clean:screenshots`;
     }
 }
 
@@ -73,7 +73,7 @@ try {
             clean(...files.map((x) => `cpp/perspective/obj/${x}`));
         }
 
-        execute`lerna exec --scope="@finos/${scope}" -- yarn clean`;
+        run_with_scope`clean`;
         clean("docs/build", "docs/python", "docs/obj");
     }
 
