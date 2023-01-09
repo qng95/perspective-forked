@@ -53,6 +53,7 @@
         "jsverify": "^0.8.4",
         "lodash": "^4.17.4",
         "moment": "^2.19.1",
-        "papaparse": "^5.2.0"
+        "papaparse": "^5.2.0",
+        "superstore-arrow": "^1.0.0"
     }
 }

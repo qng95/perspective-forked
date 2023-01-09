@@ -1,5 +1,4 @@
 const cpy = require("cpy");
-const { WorkerPlugin } = require("@finos/perspective-esbuild-plugin/worker");
 const {
     NodeModulesExternal,
 } = require("@finos/perspective-esbuild-plugin/external");
