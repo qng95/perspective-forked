@@ -106,6 +106,7 @@ async function build_all() {
     // legacy compat
     execSync("cpy target/themes/* dist/css");
     execSync("cpy dist/css/* dist/umd");
+    execSync("cpy dist/pkg/* dist/esm");
 }
 
 build_all();
