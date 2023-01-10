@@ -61,7 +61,6 @@ function jest_all() {
         --config=tools/perspective-test/jest.all.config.js 
         --color
         --verbose 
-        --maxWorkers=50%
         --testPathIgnorePatterns='timezone'
         ${getarg("--bail") && "--bail"}
         ${getarg("--debug") || "--silent 2>&1 --noStackTrace"} 
