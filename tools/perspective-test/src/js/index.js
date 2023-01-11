@@ -270,14 +270,14 @@ function write_results(updated, filename) {
     fs.writeFileSync(dir_name, JSON.stringify(results2, null, 4));
 }
 
-afterAll(() => {
+afterAll(async () => {
     try {
         if (process.env.WRITE_TESTS) {
             write_results(new_results, RESULTS_FILENAME);
             write_results(new_debug_results, RESULTS_DEBUG_FILENAME);
         }
         if (page) {
-            page.close();
+            await page.close();
         }
     } catch (e) {
         private_console.error(e);

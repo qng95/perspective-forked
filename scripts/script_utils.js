@@ -73,7 +73,7 @@ const execute_return = async (cmd) => {
     }
 
     const ex = promisify(require("child_process").exec);
-    return await ex(cmd, { maxBuffer: 1024 * 1024 * 100 });
+    return ex(cmd, { maxBuffer: 1024 * 1024 * 100 });
 };
 
 /*******************************************************************************
@@ -117,14 +117,6 @@ exports.get_scope = function get_scope() {
 
 const PACKAGE_MANAGER = "npm";
 exports.PACKAGE_MANAGER = PACKAGE_MANAGER;
-
-exports.run_with_scope = function run_with_scope(strings, ...args) {
-    execute(
-        `${PACKAGE_MANAGER} ${exports.get_scope()} run ${
-            Array.isArray(strings) ? bash(strings, ...args) : strings
-        }`
-    );
-};
 
 exports.bash_with_scope = function bash_with_scope(strings, ...args) {
     return `${PACKAGE_MANAGER} ${exports.get_scope()} run ${
@@ -303,6 +295,92 @@ const getarg = (exports.getarg = function (flag, ...args) {
             .join(" ");
     }
 });
+
+exports.run_with_scope = async function run_recursive(strings, ...args) {
+    let scope =
+        process.env.PACKAGE && process.env.PACKAGE !== ""
+            ? process.env.PACKAGE.split(",")
+            : [];
+
+    const { stdout } = await execute_return("npm ls --depth 1 --json");
+    const workspaces = JSON.parse(stdout.toString());
+    const compiled = new Set(
+        Object.keys(workspaces.dependencies).filter(
+            (x) => !workspaces.dependencies[x].resolved.startsWith("file:")
+        )
+    );
+
+    let uncompiled = Object.keys(workspaces.dependencies).filter((x) =>
+        workspaces.dependencies[x].resolved.startsWith("file:")
+    );
+
+    const is_valid = new Set(uncompiled);
+
+    while (uncompiled.length > 0) {
+        const batch = [];
+        const new_uncompiled = [];
+        for (const pkgname of uncompiled) {
+            let deps_met = true;
+            const pkg = workspaces.dependencies[pkgname];
+            if (pkg.dependencies) {
+                for (const dep of Object.keys(pkg.dependencies)) {
+                    deps_met =
+                        deps_met && (!is_valid.has(dep) || compiled.has(dep));
+                    if (!deps_met) {
+                        // console.debug(
+                        //     `${pkgname} has unmet dependency ${dep} ${is_valid.has(
+                        //         dep
+                        //     )}`
+                        // );
+
+                        break;
+                    }
+                }
+
+                if (deps_met) {
+                    batch.push(pkgname);
+                } else {
+                    new_uncompiled.push(pkgname);
+                }
+            }
+        }
+
+        if (batch.length === 0) {
+            throw new Error(
+                `Failed to resolved dependencies for ${new_uncompiled.join(
+                    ","
+                )}`
+            );
+        }
+
+        const cmd = strings[0].split(" ")[0];
+        console.log(`-- Running ${cmd} for ${batch.join(",")}`);
+        for (const pkgname of batch) {
+            const pkg = JSON.parse(
+                fs.readFileSync(require.resolve(pkgname + "/package.json"))
+            );
+
+            if (pkg.scripts?.[cmd]) {
+                execute(
+                    `${PACKAGE_MANAGER} --workspace ${pkgname} run ${
+                        Array.isArray(strings)
+                            ? bash(strings, ...args)
+                            : strings
+                    }`
+                );
+            }
+
+            compiled.add(pkgname);
+        }
+
+        uncompiled = new_uncompiled;
+    }
+
+    if (scope.length === 0) {
+    }
+};
+
+/**
 
 /**
  * A `bash` expression for running commands in Docker images

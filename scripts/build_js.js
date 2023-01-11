@@ -9,9 +9,13 @@
 
 const { run_with_scope } = require("./script_utils.js");
 
-try {
-    run_with_scope`build`;
-} catch (e) {
-    console.log(e.message);
-    process.exit(1);
+async function run() {
+    try {
+        await run_with_scope`build`;
+    } catch (e) {
+        console.log(e.message);
+        process.exit(1);
+    }
 }
+
+run();

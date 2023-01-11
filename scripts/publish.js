@@ -334,7 +334,7 @@ function askQuestion(query) {
                         )}`
                     );
                     console.error(
-                        "Skipping twine upload, marked as dry run.\nSet env var COMMIT=1 to run fo real."
+                        "Skipping twine/npm upload, marked as dry run.\nSet env var COMMIT=1 to run fo real."
                     );
                 } else {
                     execute`twine upload ${wheel_folder}/*`;

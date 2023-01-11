@@ -7,7 +7,7 @@ module.exports = {
         "packages/perspective-workspace/test/js",
         "packages/perspective-jupyterlab/test/js",
     ],
-    verbose: true,
+    testEnvironment: "@finos/perspective-test/src/js/set_timezone.js",
     testEnvironmentOptions: {
         url: "http://localhost/",
     },
@@ -18,6 +18,7 @@ module.exports = {
     collectCoverageFrom: ["packages/perspective/dist/cjs/**"],
     coverageProvider: "v8",
     coverageReporters: ["cobertura", "text"],
+    setupFilesAfterEnv: ["@finos/perspective-test/src/js/set_timezone.js"],
 
     // perspective-jupyterlab tests mock `@jupyter-widgets`, which is in
     // Typescript.
