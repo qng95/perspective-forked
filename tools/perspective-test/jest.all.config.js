@@ -14,10 +14,10 @@ module.exports = {
     transform: {
         ".html$": "html-loader-jest",
     },
-    collectCoverage: true,
-    collectCoverageFrom: ["packages/perspective/dist/cjs/**"],
-    coverageProvider: "v8",
-    coverageReporters: ["cobertura", "text"],
+    // collectCoverage: true,
+    // collectCoverageFrom: ["packages/perspective/dist/cjs/**"],
+    // coverageProvider: "v8",
+    // coverageReporters: ["cobertura", "text"],
     setupFilesAfterEnv: ["@finos/perspective-test/src/js/set_timezone.js"],
 
     // perspective-jupyterlab tests mock `@jupyter-widgets`, which is in
