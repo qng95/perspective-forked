@@ -190,7 +190,7 @@ jobs:
                 os:
                     - ubuntu-20.04 # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
                 python-version:
-                    - 3.9
+                    - "3.11"
                 node-version: [16.x]
 
             # NOTE: don't fail fast as sometimes npm blocks the burst of fetches from GHA
@@ -432,7 +432,7 @@ jobs:
                 os:
                     - ubuntu-20.04 # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
                 python-version:
-                    - 3.9
+                    - "3.11"
 
             # NOTE: don't fail fast as sometimes npm blocks the burst of fetches from GHA
             fail-fast: false
@@ -547,7 +547,7 @@ jobs:
                 os:
                     - ubuntu-20.04 # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
                 python-version:
-                    - 3.9
+                    - "3.11"
                 node-version: [16.x]
 
             # NOTE: don't fail fast as sometimes npm blocks the burst of fetches from GHA
@@ -731,9 +731,6 @@ jobs:
                     - windows-2022 # https://github.com/actions/virtual-environments/blob/main/images/win/Windows2022-Readme.md
                     - windows-2019 # https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
                 python-version:
-                    - 3.8
-                    - 3.9
-                    - "3.10"
                     - "3.11"
                 container:
                     - none # Not manylinux, we will use this space to build the WASM assets
@@ -779,11 +776,11 @@ jobs:
                       os: macos-11
 
                     # Exclude Python 3.8, 3.10 builds
-                    - is-full-run: false
-                      python-version: 3.8
+                    # - is-full-run: false
+                    #  python-version: 3.8
 
-                    - is-full-run: false
-                      python-version: "3.10"
+                    # - is-full-run: false
+                    #  python-version: "3.10"
 
             # NOTE: don't fail fast as sometimes npm blocks the burst of fetches from GHA
             fail-fast: false
@@ -1050,7 +1047,7 @@ jobs:
                 os:
                     - ubuntu-20.04 # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
                 python-version:
-                    - 3.9
+                    - "3.11"
                 node-version: [16.x]
             # NOTE: don't fail fast as sometimes npm blocks the burst of fetches from GHA
             fail-fast: false
@@ -1219,9 +1216,6 @@ jobs:
                     - windows-2022 # https://github.com/actions/virtual-environments/blob/main/images/win/Windows2022-Readme.md
                     - windows-2019 # https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
                 python-version:
-                    - 3.8
-                    - 3.9
-                    - "3.10"
                     - "3.11"
                 node-version: [16.x]
                 is-full-run:
@@ -1248,11 +1242,11 @@ jobs:
                       os: macos-11
 
                     # Exclude Python 3.8, 3.10 builds
-                    - is-full-run: false
-                      python-version: 3.8
+                    # - is-full-run: false
+                    #  python-version: 3.8
 
-                    - is-full-run: false
-                      python-version: "3.10"
+                    # - is-full-run: false
+                    #  python-version: "3.10"
             # NOTE: don't fail fast as sometimes npm blocks the burst of fetches from GHA
             fail-fast: false
 
@@ -1387,7 +1381,7 @@ jobs:
                 os:
                     - ubuntu-20.04 # https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu2004-Readme.md
                 python-version:
-                    - 3.9
+                    - "3.11"
 
         ##################################
         # Setup matrix job configuration #
